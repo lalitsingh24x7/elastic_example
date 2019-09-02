@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'product.apps.ProductConfig',
-    'elastic.apps.ElasticConfig'
+    'elastic.apps.ElasticConfig',
+
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -122,4 +124,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ELASTIC_HOST = 'http://localhost:9200/'
+ELASTIC_HOST = 'localhost'
