@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'elastic.apps.ElasticConfig',
 
-    'rest_framework'
+    'rest_framework',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

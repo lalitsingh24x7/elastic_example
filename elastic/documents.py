@@ -26,7 +26,7 @@ class ProductDocument(Document):
     name = Text(analyzer='snowball', fields={'raw': Keyword()})
     slug = Keyword()
     color = Color
-    category = Category
+    category = Nested(Category)
     is_sold = Boolean()
     size = Keyword()
     price = Brand

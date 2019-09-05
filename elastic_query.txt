@@ -1,0 +1,168 @@
+GET product
+
+GET product/_doc/1
+
+PUT product/_doc/1
+{
+    "id" : 1,
+    "brand" : {
+      "id" : 1,
+      "name" : "Puma"
+    },
+    "is_sold" : false,
+    "slug" : "puma-black-t-shirt",
+    "price" : 1000,
+    "size" : [
+      "S",
+      "M",
+      "L"
+    ],
+    "category" : [
+      {
+        "name" : "T-shirt"
+      }
+    ],
+    "name" : "Puma Black T-shirt",
+    "color" : {
+      "id" : 5,
+      "name" : "Black"
+    }
+  }
+
+DELETE product/_doc/1
+
+GET product/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match_all": {
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET product/_search
+{
+  "query": {
+    "nested": {
+      "path": "category",
+      "query": {
+        "match": {
+          "category.name": "jeans"
+        }
+      }
+    }
+  }
+}
+
+GET product/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "levis jeans",
+      "fields": ["brand.name^5", "name"]
+    }
+  }
+}
+
+GET product/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "aggs": {
+    "popular_color": {
+      "terms": {
+        "field": "color.name.keyword",
+        "size": 10
+      }
+    }
+  }
+}
+
+GET product/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "aggs": {
+    "popular_color": {
+      "terms": {
+        "field": "color.name.keyword",
+        "size": 10
+      }
+    },
+    "avg_price":{
+      "avg": {
+        "field": "price"
+      }
+    },
+    "max_price":{
+      "max": {
+        "field": "price"
+      }
+    },
+    "min_price":{
+      "min": {
+        "field": "price"
+      }
+    }
+  }
+}
+
+GET product/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "aggs": {
+    "stats_price": {
+      "stats": {
+        "field": "price"
+      }
+    }
+  }
+}
+
+GET product/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "aggs": {
+    "popular_size": {
+      "terms": {
+        "field": "size",
+        "size": 10
+      }
+    },
+    "popular_color": {
+      "terms": {
+        "field": "color.name.keyword",
+        "size": 10
+      }
+    },
+    "popular_brand": {
+      "terms": {
+        "field": "brand.name.keyword",
+        "size": 10
+      }
+    }
+  }
+}
+
+GET _analyze
+{
+  "text": "this is white ball",
+  "analyzer": "standard"
+}
+
+GET _analyze
+{
+  "text": "this is white ball",
+  "analyzer": "snowball"
+}

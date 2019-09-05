@@ -32,7 +32,7 @@ class Size(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=250)
-    slug = models.SlugField(blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, default=None)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category)
     is_sold = models.BooleanField(default=False)

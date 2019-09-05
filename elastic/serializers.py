@@ -34,7 +34,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     color = ColorSerializer()
-    category = CategorySerializer()
+    category = CategorySerializer(many=True)
     size = serializers.SerializerMethodField()
     brand = BrandSerializer()
 
